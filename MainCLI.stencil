@@ -1,0 +1,11 @@
+import Foundation
+import ANSITerminal
+import ArgumentParser
+import Files
+
+
+@main
+struct {{ name }}: ParsableCommand {
+    func run() throws {
+    }
+}

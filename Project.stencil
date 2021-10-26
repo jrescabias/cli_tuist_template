@@ -1,0 +1,34 @@
+import ProjectDescription 
+
+let target = Target(name: "{{ name }}",
+                    platform: .macOS,
+                    product: .commandLineTool,
+                    bundleId: "com.jem.{{ name }}",
+                    infoPlist: .default,
+                    sources: [
+                        "Sources/**"
+                    ],
+                    dependencies: [
+                        .package(product: "ANSITerminal"),
+                        .package(product: "ArgumentParser"),
+                        .package(product: "SwiftFigletKit"),
+                        .package(product: "Files")
+                    ]
+)
+
+let scheme = Scheme(name: "{{ name }}", shared: true, buildAction: .buildAction(targets: ["{{ name }}"]), runAction: .runAction(configuration: .debug, executable: "{{ name }}"))
+
+let prj = Project(name: "{{ name }}",
+                  organizationName: "Jose Escabias",
+                  packages: [
+                    .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
+                    .package(url: "https://github.com/JohnSundell/Files", from: "4.0.0"),
+                    .package(url: "https://github.com/pakLebah/ANSITerminal", from: "0.0.3"),
+                    .package(url: "https://github.com/dfreniche/SwiftFiglet", .upToNextMajor(from: "0.2.1"))
+                  ],
+                  targets: [
+                    target
+                  ],
+                  schemes: [scheme]
+
+)
